@@ -7,18 +7,30 @@ import com.project.cinderella.model.domain.Member;
 import com.project.cinderella.model.domain.OrderSummary;
 import com.project.cinderella.model.domain.Receiver;
 
-
 public interface PaymentService {
-	//?옣諛붽뎄?땲 愿??젴 ?뾽臾?
-	public List selectCartList();//?쉶?썝 援щ텇?뾾?씠 紐⑤뱺 ?뜲?씠?꽣 媛??졇?삤湲? 
-	public List selectCartList(int member_id);//?듅?젙 ?쉶?썝?쓽 ?옣諛붽뎄?땲 ?궡?뿭
-	public Cart selectCart(int cart_id);
-	public void insert(Cart cart);
-	public void update(List<Cart> cartList); //?씪愿? ?닔?젙
-	public void delete(Cart cart); //pk?뿉 ?냽?븳 ?뜲?씠?꽣 ?궘?젣?븷?삁?젙
-	public void delete(Member member); //?쉶?썝?뿉 ?냽?븳 ?뜲?씠?꽣 ?궘?젣?븷?삁?젙
-	
-	//寃곗젣 ?뾽臾?
-	public List selectPaymethodList();
-	public void registOrder(OrderSummary orderSummary, Receiver receiver);//?듃?옖?옲?뀡 泥섎━媛? ?슂援щ릺?뒗 硫붿꽌?뱶...
+   // 장바구니 관련 업무
+   public List selectCartList();// 회원 구분없이 모든 데이터 가져오기
+
+   public List selectCartList(int member_id);// 특정 회원의 장바구니 내역
+
+   public Cart selectCart(int cart_id);
+
+   public void insert(Cart cart);
+
+   public void update(List<Cart> cartList); // 일괄 수정
+
+   public void delete(Cart cart); // pk에 속한 데이터 삭제할예정
+
+   public void delete(Member member); // 회원에 속한 데이터 삭제할예정
+
+   public void delete(int product_id); // 회원에 속한 데이터 삭제할예정
+
+   // 결제 업무
+   public List selectPaymethodList();
+   
+   public List selectOrderList(); //주문목록 가져오기
+   public List selectOrderStateList(); //주문목록 가져오기
+
+   // public void registOrder(OrderSummary orderSummary);//트랜잭션 처리가 요구되는 메서드...
+   public void registOrder(OrderSummary orderSummary, Receiver receiver);// 트랜잭션 처리가 요구되는 메서드...
 }

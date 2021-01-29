@@ -32,7 +32,7 @@
       
       //form 태그의 파라미터들을 전송할수있는 상태로 둬야  data키값에 form 자체를 넣을 수 있다.
       var formData = $("#member_form").serialize(); //전부 문자열화 시킨다!!
-      alert(formData);
+      //alert(formData);
       
       $.ajax({
          url:"/cinderella/shop/member/regist", 

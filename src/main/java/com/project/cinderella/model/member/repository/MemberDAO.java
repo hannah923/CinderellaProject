@@ -13,6 +13,7 @@ public interface MemberDAO {
 	   public void update(Member member);
 	   public void delete(Member member);
 	   public Member selectbyuser_id(String user_id);
+	   public void updateBuyCount(Member member, int member_id);
 
 
 }

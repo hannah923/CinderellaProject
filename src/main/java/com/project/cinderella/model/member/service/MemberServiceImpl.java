@@ -51,27 +51,32 @@ public class MemberServiceImpl implements MemberService{
       
         String secureData = secureManager.getSecureData(member.getPassword());
         member.setPassword(secureData); //변환시켜 다시 VO에 대입
-                   
+        System.out.println("서비스일시작");       
             memberDAO.insert(member);
-            
+            System.out.println("서비스일끝");
             String name=member.getName();
             String addr=member.getAddr();
             String email = member.getEmail_id()+"@"+member.getEmail_server();
-      
-            
-            
             mailSender.send(email , name+"님 maleshop 가입축하", "많이 이용해주세요");
    }
+      
 
    @Override
    public void update(Member member) {
-      // TODO Auto-generated method stub
       
+	   String secureData = secureManager.getSecureData(member.getPassword());
+       member.setPassword(secureData); //변환시켜 다시 VO에 대입
+       System.out.println("서비스일시작");
+       memberDAO.update(member);
+       System.out.println("서비스일끝");
+       
+       
+       
    }
 
    @Override
    public void delete(Member member) {
-      // TODO Auto-generated method stub
+      memberDAO.delete(member);
       
    }
 
@@ -83,6 +88,13 @@ public void shotmail(String user_id) {
 	String name=member.getName();
 	String email =  member.getEmail_id()+"@"+member.getEmail_server();
 	mailSender.send(email, name+"님 이벤트 당첨(10000원 할인권)을 진심으로 축하드립니다!", "이벤트코드 : qweqwe12");
+	
+}
+
+
+@Override
+public void updateBuyCount(Member member, int member_id) {
+	memberDAO.updateBuyCount(member, member_id);
 	
 }
 

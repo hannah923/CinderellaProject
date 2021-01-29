@@ -11,6 +11,8 @@ import com.project.cinderella.model.domain.PhotoReview;
 public interface PhotoReviewService {
 	public List selectAll();
 	public List selectForProductDetail(String product_name);
+	public List selectForMylog(String user_id);
+	
 	public PhotoReview select(int photoreview_id); 
 	public void regist(FileManager fileManager,PhotoReview photoReview);
 	public void delete(int photoreview_id);

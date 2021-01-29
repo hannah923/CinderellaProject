@@ -101,7 +101,7 @@
     <!-- Checkout Section Begin -->
 
 	<section class="checkout spad">
-		<div style="position: relative; left: 1200px; top: 20px;">
+		<div style="position: relative; left: 1200px; top: 20px; cursor: pointer;">
 			<a onClick="regist()" class="primary-btn">Regist <span
 				class="arrow_right"> </span>
 			</a>

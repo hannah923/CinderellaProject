@@ -78,7 +78,7 @@
                                         <div class="quantity">
                                             <div class="pro-qty-2">
                                                 <input type="hidden" name="cart_id" value="<%=cart.getCart_id()%>">
-                                                <input type="number" name="quantity" class="qty-text" id="qty" step="1" min="1" max="99"  value="<%=cart.getQuantity()%>">
+                                                <input type="number" name="quantity" class="qty-text" id="qty" step="1" min="1" max="99"  value="0">
                                             </div>
                                         </div>
                                     </td>

@@ -34,7 +34,7 @@ $(function(){
 		<%for(int i=0;i<productList.size();i++){%>
 		<%Product product = productList.get(i); %>
 		<tr>
-			<td>Jill</td>
+			<td><%=productList.size()-i %></td>
 			<td><img src="/cinderella/resources/data/basic/<%=product.getProduct_id()%>.<%=product.getFilename()%>" width="50px"></td>
 			<%-- <td><%=product.getSubCategory().getSubcategory_name() %></td> --%>
 			<td><a href = "/cinderella/admin/product/detail?product_id=<%=product.getProduct_id()%>"><%=product.getProduct_name() %></a></td>

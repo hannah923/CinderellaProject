@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.cinderella.controller.product.ProductController;
 import com.project.cinderella.model.domain.Member;
+import com.project.cinderella.model.preview.service.PhotoReviewService;
 import com.project.cinderella.model.product.service.ProductService;
 import com.project.cinderella.model.product.service.TopCategoryService;
 
@@ -27,6 +28,9 @@ public class MainController {
    
    @Autowired
    private ProductService productService;
+   
+   @Autowired
+   private PhotoReviewService photoReviewService; 
 
    @RequestMapping(value="/", method=RequestMethod.GET)
    public ModelAndView main(HttpServletRequest request, HttpSession session) {
@@ -37,8 +41,10 @@ public class MainController {
       List topList = topCategoryService.selectAll();
       List productListByHit = productService.selectAllByHit();
       List productListByNew = productService.selectAll();
+      List photoReviewList = photoReviewService.selectAll();
       mav.addObject("topList", topList);
       mav.addObject("productListByHit", productListByHit);
+      mav.addObject("photoReviewList", photoReviewList);
       mav.addObject("productListByNew", productListByNew);
       mav.setViewName("index"); //메인 페이지
       return mav;

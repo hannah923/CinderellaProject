@@ -3,6 +3,7 @@ package com.project.cinderella.controller.product;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -219,13 +220,18 @@ public class ProductController implements ServletContextAware {
 	      // logger.debug("ㅇㅇㅇ "+subcategory_id);
 	      List productList = productService.selectByTopcategoryId(topcategory_id);
 
+	      
+
 	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("topcategory_id", topcategory_id);
 	      mav.addObject("topList", topList);
 	      mav.addObject("productList", productList);
 
 	      mav.setViewName("shop/product/list");
 	      return mav;
 	   }
+
+
 
 	   // SubCategory의 전체 상품목록 요청 처리
 	   @RequestMapping(value = "/shop/product/sublist", method = RequestMethod.GET)
@@ -240,6 +246,8 @@ public class ProductController implements ServletContextAware {
 	      mav.setViewName("shop/product/list");
 	      return mav;
 	   }
+
+
 
 	   // 상품 상세보기 요청 처리
 	   @RequestMapping(value = "/shop/product/detail", method = RequestMethod.GET)
@@ -263,7 +271,7 @@ public class ProductController implements ServletContextAware {
 
 	   // 사이즈별 상품목록 요청 처리
 	   @RequestMapping(value = "/shop/product/size", method = RequestMethod.GET)
-	   public ModelAndView getShopProductSize(String size) {
+	   public ModelAndView getShopProductSize(String size,HttpServletRequest request) {
 	      List topList = topCategoryService.selectAll();
 	      List productListBySize = productService.selectBySize(size);
 
@@ -295,15 +303,12 @@ public class ProductController implements ServletContextAware {
 	   @RequestMapping(value = "/shop/product/comment_delete", method = RequestMethod.GET)
 	   public String deleteComment(int comment_id) {
 	      commentsService.deleteById(comment_id);
+	      
+	      List topList = topCategoryService.selectAll();
 
-	      StringBuilder sb = new StringBuilder();
-	      sb.append("{");
-	      sb.append("\"result\":1,");
-	      sb.append("\"msg\":\"댓글삭제 성공\"");
-	      sb.append("}");
-
-	      return sb.toString();
+	      return "redirect:/";
 	   }
+
 	   
 	   /*
 	    * //상품에 대한 댓글들 전체 삭제하기

@@ -43,5 +43,11 @@ public class MybayisPhotoReviewDAO implements PhotoReviewDAO{
 		
 	}
 
+	@Override
+	public List selectForMylog(String user_id) {
+		
+		return sqlSessionTemplate.selectList("PhotoReview.selectForMylog",user_id);
+	}
+
 
 }

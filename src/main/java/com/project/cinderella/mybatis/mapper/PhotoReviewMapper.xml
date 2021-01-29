@@ -29,6 +29,10 @@
 		select * from photoreview where photoreview_id=#{photoreview_id}
 	</select>
 	
+	<select id="selectForMylog" resultType="PhotoReview" parameterType="String">
+		select * from photoreview where user_id like #{user_id, jdbcType=VARCHAR}
+	</select>
+	
 	<insert id="insert" parameterType="PhotoReview" >
 	insert into photoreview(photoreview_id,user_id, height, wearing_size, body_type, brand, product_name, review, filename,product_id,regdate)
 	 values(seq_photoreview.nextval,#{user_id, jdbcType=VARCHAR}, #{height, jdbcType=NUMERIC}, #{wearing_size, jdbcType=VARCHAR}, #{body_type, jdbcType=VARCHAR}, #{brand, jdbcType=VARCHAR},#{product_name, jdbcType=VARCHAR},#{review, jdbcType=VARCHAR},#{filename, jdbcType=VARCHAR},#{product_id, jdbcType=NUMERIC},#{regdate,jdbcType=VARCHAR})

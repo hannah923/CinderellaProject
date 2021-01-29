@@ -53,5 +53,14 @@
    <select id="selectAll" resultType="Member">
    select * from member order by member_id
    </select>
+    <update id="updateBuyCount" parameterType="Member">
+      update member set buy_count=buy_count+1 where member_id=#{member_id}
+   </update>
    
+   <update id="update" parameterType="Member">
+   		update member set user_id=#{user_id}, password=#{password}, name=#{name}, email_id=#{email_id}, email_server=#{email_server}, zipcode=#{zipcode}, addr=#{addr} where member_id=#{member_id}
+   	</update>
+   	<delete id="delete" parameterType="Member" >
+   		delete from member where user_id=#{user_id}
+   	</delete>
 </mapper>

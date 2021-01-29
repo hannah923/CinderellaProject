@@ -5,6 +5,7 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%
    //List<TopCategory> topList = (List)request.getAttribute("topList");
+   //int topcategory_id = (int)request.getAttribute("topcategory_id");
    List<SubCategory> subList = (List)request.getAttribute("subList");
    //System.out.println("subList" + subList.toString());
    List<Product> productList  = (List)request.getAttribute("productList");
@@ -17,7 +18,7 @@
     <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Male-Fashion | Template</title>
+    <title>Cinderella | ProductList</title>
     <%@ include file="../inc/header.jsp" %>
 </head>
 <style>
@@ -49,7 +50,8 @@ function sizeL(){
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__text">
-                        <h4>Product</h4>
+                            <%-- <%TopCategory topCategory1 = topList.get(topcategory_id-1); %>  --%>
+                           <h4>Product -<%--  <%=topCategory1.getTopcategory_name()%> --%></h4>
                         <div class="breadcrumb__links">
                             <a href="/cinderella/">Home</a>
                             <span>Product</span>

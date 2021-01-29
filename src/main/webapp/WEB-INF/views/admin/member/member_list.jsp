@@ -21,14 +21,14 @@
 <body>
 <%@include file="../inc/main_navi.jsp" %>
 
-   <h3>상품목록</h3>
+   <h3>회원목록</h3>
    <p>
    <table>
       <tr>
          <th>UserId</th>
          <th>Name</th>
          <th>Buy Count</th>
-         <th>Membership_id</th>
+         
      
     </tr>
       <%for(int i=0;i<memberList.size();i++){ %>
@@ -37,14 +37,10 @@
          <td><%=member.getUser_id()%></td>
          <td><%=member.getName()%></td>
          <td><%=member.getBuy_count()%></td>
-         <td><%=member.getMembership_id()%></td>
+        
       </tr>
       <%} %> 
-      <tr>
-         <td colspan="5">
-            <button>상품등록</button>
-         </td>
-      </tr>
+      
    </table>
    </p>
 

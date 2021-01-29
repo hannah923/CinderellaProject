@@ -23,6 +23,7 @@
 		<typeAlias type="com.project.cinderella.model.domain.Receiver" alias="Receiver"/>
 		<typeAlias type="com.project.cinderella.model.domain.Paymethod" alias="Paymethod"/>
 		<typeAlias type="com.project.cinderella.model.domain.OrderSummary" alias="OrderSummary"/>
+		<typeAlias type="com.project.cinderella.model.domain.OrderState" alias="OrderState"/>
 		
 	</typeAliases>
   	<mappers>
@@ -44,6 +45,7 @@
 		<mapper resource="com/project/cinderella/mybatis/mapper/PaymethodMapper.xml"/>
 		<mapper resource="com/project/cinderella/mybatis/mapper/ReceiverMapper.xml"/>
 		<mapper resource="com/project/cinderella/mybatis/mapper/OrderSummaryMapper.xml"/>
+		<mapper resource="com/project/cinderella/mybatis/mapper/OrderStateMapper.xml"/>
 		
   	</mappers>
 </configuration>

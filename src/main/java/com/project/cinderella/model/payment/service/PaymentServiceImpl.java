@@ -11,6 +11,7 @@ import com.project.cinderella.model.domain.Member;
 import com.project.cinderella.model.domain.OrderSummary;
 import com.project.cinderella.model.domain.Receiver;
 import com.project.cinderella.model.payment.repository.CartDAO;
+import com.project.cinderella.model.payment.repository.OrderStateDAO;
 import com.project.cinderella.model.payment.repository.OrderSummaryDAO;
 import com.project.cinderella.model.payment.repository.PaymethodDAO;
 import com.project.cinderella.model.payment.repository.ReceiverDAO;
@@ -26,9 +27,12 @@ public class PaymentServiceImpl implements PaymentService{
    private PaymethodDAO paymethodDAO;
 
    
-   //ì£¼ë¬¸ê´?? ¨ 3ê°?ì§? DAO 
+   //ÁÖ¹®°ü·Ã 3°¡Áö DAO 
    @Autowired
    private OrderSummaryDAO orderSummaryDAO;
+   
+   @Autowired
+   private OrderStateDAO orderStateDAO;
    
    @Autowired
    private ReceiverDAO receiverDAO;
@@ -63,7 +67,7 @@ public class PaymentServiceImpl implements PaymentService{
 
    @Override
    public void update(List<Cart> cartList) throws CartException{
-      //?ƒ?’ˆ ê°??ˆ˜ë§Œí¼ ?ˆ˜? • ?š”ì²? 
+      //»óÇ° °¹¼ö¸¸Å­ ¼öÁ¤ ¿äÃ» 
       for(Cart cart : cartList) {
          cartDAO.update(cart);
       }
@@ -84,24 +88,40 @@ public class PaymentServiceImpl implements PaymentService{
       return paymethodDAO.selectAll();
    }
    
-   //ì£¼ë¬¸ ?“±ë¡? 
+   //ÁÖ¹® µî·Ï 
    @Override
    public void registOrder(OrderSummary orderSummary, Receiver receiver) {
-      //ì£¼ë¬¸?š”?•½ ?“±ë¡? 
+      //ÁÖ¹®¿ä¾à µî·Ï 
       orderSummaryDAO.insert(orderSummary);
-      //ì£¼ë¬¸ ?š”?•½?´ ?“±ë¡ëœ ?´?›„, orderSummary VO?—?Š” mybatis?˜ selectkey?— ?˜?•´ order_summary_id ê°?  ì±„ì›Œ? ¸ ?ˆ?‹¤..
-      //?”°?¼?„œ ì·¨ë“?•œ ì£¼ë¬¸ë²ˆí˜¸ë¥? ë°›ëŠ”?‚¬?Œ, ?ƒ?„¸?— ?„£?–´ì¤˜ì•¼ ?•¨.
+      //ÁÖ¹® ¿ä¾àÀÌ µî·ÏµÈ ÀÌÈÄ, orderSummary VO¿¡´Â mybatisÀÇ selectkey¿¡ ÀÇÇØ order_summary_id °¡  Ã¤¿öÁ® ÀÖ´Ù..
+      //µû¶ó¼­ ÃëµæÇÑ ÁÖ¹®¹øÈ£¸¦ ¹Ş´Â»ç¶÷, »ó¼¼¿¡ ³Ö¾îÁà¾ß ÇÔ.
       
-      //ë°›ëŠ”?‚¬?Œ ? •ë³? ?“±ë¡?
-      receiver.setOrder_summary_id(orderSummary.getOrder_summary_id()); //ì£¼ë¬¸ë²ˆí˜¸ ? „?‹¬!!
+      //¹Ş´Â»ç¶÷ Á¤º¸ µî·Ï
+      receiver.setOrder_summary_id(orderSummary.getOrder_summary_id()); //ÁÖ¹®¹øÈ£ Àü´Ş!!
       receiverDAO.insert(receiver);
       
-      //ì£¼ë¬¸?ƒ?„¸ ?“±ë¡?
-      //?¥ë°”êµ¬?‹ˆë¥? ì¡°íšŒ?•˜?—¬ OrderDetail VO ì²˜ë¦¬ 
-      //?¥ë°”êµ¬?‹ˆ ê°?? ¸?˜¤ê¸? 
+      //ÁÖ¹®»ó¼¼ µî·Ï
+      //Àå¹Ù±¸´Ï¸¦ Á¶È¸ÇÏ¿© OrderDetail VO Ã³¸® 
+      //Àå¹Ù±¸´Ï °¡Á®¿À±â 
       
       
    }
+
+@Override
+public void delete(int product_id) {
+   cartDAO.deleteCart(product_id);
+   
+}
+
+@Override
+public List selectOrderList() {
+   return orderSummaryDAO.selectAll();
+}
+
+@Override
+public List selectOrderStateList() {
+   return orderStateDAO.selectAll();
+}
    
    
 }

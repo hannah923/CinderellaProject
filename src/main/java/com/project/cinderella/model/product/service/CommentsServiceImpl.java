@@ -19,13 +19,6 @@ public class CommentsServiceImpl implements CommentsService{
    public List selectById(int product_id) {
       return commentsDAO.selectById(product_id);
    }
-   
-   @Override
-   public List selectByName(String product_name) {
-   
-   	return commentsDAO.selectByName(product_name);
-   }
-
 
    @Override
    public void insert(Comments comments) throws CommentsRegistException {
@@ -46,10 +39,9 @@ public class CommentsServiceImpl implements CommentsService{
 
    @Override
    public void deleteById(int comments_id) throws CommentsRegistException   {
-      // TODO Auto-generated method stub
+      commentsDAO.deleteById(comments_id);
       
    }
-
 
 
    

@@ -3,6 +3,8 @@ package com.project.cinderella.model.product.repository;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -11,18 +13,13 @@ import com.project.cinderella.model.domain.Comments;
 
 @Repository
 public class MybatisCommentDAO implements CommentsDAO {
-   
+   private static final Logger logger = LoggerFactory.getLogger(MybatisCommentDAO.class);
    @Autowired
    private SqlSessionTemplate sqlSessionTemplate;
    
    @Override
    public List selectById(int product_id) {
       return sqlSessionTemplate.selectList("Comments.selectById", product_id);
-   }
-   @Override
-   public List selectByName(String product_name) {
-   	
-   	return sqlSessionTemplate.selectList("Comments.selectByName",product_name);
    }
 
    @Override
@@ -43,15 +40,15 @@ public class MybatisCommentDAO implements CommentsDAO {
    public void delete(int product_id) throws CommentsRegistException {
       int result = sqlSessionTemplate.delete("Comments.delete", product_id);
       if(result==0) {
+         logger.debug("CommentsRegistException");
          throw new CommentsRegistException("댓글삭제 실패");
       }
    }
 
    @Override
    public void deleteById(int comment_id) throws CommentsRegistException {
-      sqlSessionTemplate.selectList("Comments.deleteById", comment_id);
+      sqlSessionTemplate.delete("Comments.deleteById", comment_id);
    }
-
 
 
 }

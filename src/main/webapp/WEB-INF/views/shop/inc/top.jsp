@@ -73,16 +73,18 @@
                                    <a href="/cinderella/shop/member/logout">Sign Out</a>
                                 <%} %>
 
-                                <a href="#">FAQs</a>
+                             
                             </div>
+                            <%if(session.getAttribute("member")!=null){ //세션에 담겨진 데이터가 있다면%>
                             <div class="header__top__hover">
-                                <span>Usd <i class="arrow_carrot-down"></i></span>
+                                <span>MyPage <i class="arrow_carrot-down"></i></span>
                                 <ul>
-                                    <li>USD</li>
-                                    <li>EUR</li>
-                                    <li>USD</li>
-                                </ul>
+                                    <li><a href="/cinderella/shop/member/userinfo">User info</a></li>
+                                   <li><a href="/cinderella/shop/member/mylog?user_id=<%=member.getUser_id()%>">MyLog</a></li>
+                                 </ul>
                             </div>
+                            <%}%>
+                            
                         </div>
                     </div>
                 </div>
@@ -104,6 +106,7 @@
                                   <%for(int i=0; i<topList.size(); i++){ %>
                                   <%TopCategory topCategory = topList.get(i); %>
                                      <li><a href="/cinderella/shop/product/list?topcategory_id=<%=topCategory.getTopcategory_id()%>"><%=topCategory.getTopcategory_name()%></a></li>
+
                                     <%} %> 
                                </ul> 
                             </li>

@@ -70,4 +70,10 @@ public class PhotoReviewServiceImpl implements PhotoReviewService{
 		return photoReviewDAO.selectForProductDetail(product_name);
 	}
 
+	@Override
+	public List selectForMylog(String user_id) {
+		
+		return photoReviewDAO.selectForMylog(user_id);
+	}
+
 }

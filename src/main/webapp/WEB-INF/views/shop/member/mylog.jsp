@@ -59,7 +59,7 @@
 	<%@ include file="../inc/top.jsp" %>
 	
 	
- 
+ 	<input type="hidden" id ="user_id"  value= "<%=member.getUser_id() %>"/>
     <!-- Header Section End -->
 
     <!-- Breadcrumb Section Begin -->
@@ -67,7 +67,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2>Photo Review</h2>
+                    <h2>My Photo Review</h2>
                 </div>
             </div>
         </div>
@@ -79,7 +79,7 @@
 							<div style="position:relative; left: 200px; top: 20px;"><a href="/cinderella/shop/member/loginForm" class="primary-btn" >Login for Regist
 							<span class="arrow_right"></span></a></div>
                              <%}else{ %>
-                               <div style="position:relative; left: 200px; top: 20px;"><a href="/cinderella/shop/photoreview/registform" class="primary-btn" >Regist
+                               <div style="position:relative; left: 200px; top: 20px;"><a href="/cinderella/shop/photoreview/list" class="primary-btn" >Go to Photo Review
 							<span class="arrow_right"></span></a></div>
                                 <%} %>
 
@@ -220,8 +220,7 @@
 		$(".photoreview4 .product_review").html("review:"+review);
 	});
 	$('.delX').click(function(){
-		
-		del(this.id);
+		del(this.id,$('#user_id').val());
 	});
 });
 	
@@ -237,14 +236,17 @@
 		 
 		$('.searchModal').hide();
 	}
-	
-	 function del(id) {
+	function del(id,user_id){
+		location.href="/cinderella/shop/photoreview/deleteandshowbyid?photoreView_id="+id+"&user_id="+user_id;
+		<%-- location.href="/cinderella/shop/member/mylog?user_id="+<%=member.getUser_id()%>; --%>
+	}
+	<%--  function del(id) {
+			url:"/cinderella/shop/photoreview/delete?photoreView_id="+id
 		 $.ajax({
-			url:"/cinderella/shop/photoreview/delete?photoreView_id="+id,
 			success : function() {
 				
+				location.href="/cinderella/shop/member/mylog?user_id="+<%=member.getUser_id()%>;
 				//alert("삭제 완료");
-				location.href="/cinderella/shop/photoreview/list";
 				/* console.log(data);
 				$('#container_rv').empty();
 				var tag = '';
@@ -287,7 +289,7 @@
 				alert('삭제중 에러가 발생하였습니다.');
 			}   
 		});  
-	} 
+	}  --%>
 	
 </script>
 </body>

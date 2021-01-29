@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.project.cinderella.model.domain.OrderSummary;
 
-public interface OrderSummaryDAO {
+public interface OrderStateDAO {
    public List selectAll();
-   public void insert(OrderSummary orderSummary);
-}
+   }

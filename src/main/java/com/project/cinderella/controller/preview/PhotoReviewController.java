@@ -126,6 +126,19 @@ public class PhotoReviewController implements ServletContextAware{
 			List photoReviewList = photoReviewService.selectAll();
 			return  photoReviewList;
 		}
+		//mylog에서 삭제
+		@RequestMapping(value = "/shop/photoreview/deleteandshowbyid" , method = RequestMethod.GET)
+		@ResponseBody
+		public ModelAndView delMyLogPhotoReview(int photoreView_id,String user_id) {
+			ModelAndView mav = new ModelAndView();
+			List topList = topCategoryService.selectAll();
+			
+			photoReviewService.delete(photoreView_id);
+			
+			mav.setViewName("redirect:/shop/member/mylog?user_id="+user_id);
+			return mav;
+	
+		}
 		//카드목록
 		@RequestMapping(value = "/shop/photoreview/list", method = RequestMethod.GET)
 		public ModelAndView getPhotoReviewList() {

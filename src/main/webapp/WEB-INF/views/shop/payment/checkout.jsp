@@ -1,4 +1,3 @@
-<%@page import="java.util.List"%>
 <%@page import="com.project.cinderella.common.Formatter"%>
 <%@page import="com.project.cinderella.model.domain.Member"%>
 <%@page import="com.project.cinderella.model.domain.Paymethod"%>
@@ -7,13 +6,15 @@
 <%
    List<Cart> cartList = (List)request.getAttribute("cartList");
    List<Paymethod> paymethodList = (List)request.getAttribute("paymethodList");
-   Member member = (Member)session.getAttribute("member");
+   
    
    //장바구니로부터, 상품 가액 계산
    int totalPrice=0;
+   int totalPay = 0;
    for(Cart cart : cartList){
       totalPrice += (cart.getQuantity()*cart.getPrice());
    }
+   totalPay= totalPrice+2500;
 %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -26,6 +27,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Male-Fashion | Template</title>
     <%@ include file="../inc/header.jsp" %>
+  
 
    <script>
    function setData(ch){
@@ -42,32 +44,30 @@
       }
    }
    
-   function order(){
-	      var formData = $("#checkout-form").serialize(); //전부 문자열화 시킨다!!
-	      alert(formData);
-	      $.ajax({
-	         url : "/cinderella/shop/payment/regist",
-	         data : formData,
-	         contentType : false, /* false일 경우 multipart/form-data*/
-	         processData : false, /* false일 경우 query-string으로 전송하지 않음*/
-	         type : "post",
-	         success : function(responseData) {
-	            var json = JSON.parse(responseData);//string->json으로 파싱
-	            if (json.result == 1) {
-	               alert(json.msg);
-	               location.href = "/cinderella";
-	            } else {
-	               alert(json.msg);
-	            }
-	         }
-	      });
-	   }
+  
 
+  
+   function order(){
+       var formData = $("#checkout-form").serialize(); //전부 문자열화 시킨다!!
+      
+       $.ajax({
+           url:"/cinderella/shop/payment/regist",
+           type:"post",
+           data:formData,
+           success:function(){
+        	 alert("주문이 완료 되었습니다 메인페이지로 이동합니다");
+             location.href="/cinderella/";
+           }
+        });
+       
+    } 
+  
    </script>
    
 </head>
 <body>
    <%@ include file="../inc/top.jsp" %>
+     <%Member member2=(Member)session.getAttribute("member"); %>
     <!-- Header Section End -->
 
     <!-- Breadcrumb Section Begin -->
@@ -102,7 +102,8 @@
                             
                             <!-- <form id="checkout-form"> -->
                             <input type="hidden" name="total_price" value="<%=totalPrice %>">
-                            <input type="hidden" name="total_pay" value="<%=totalPrice%>">
+                            <input type="hidden" name="total_pay" value="<%=totalPay%>">
+                            
                             
                             <div class="row">
                                 <div class="col-lg-6">
@@ -138,7 +139,7 @@
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>받으실 고객 명<span>*</span></p>
-                                        <input type="text" name="receiver_name" value="">
+                                        <input type="text" name="receiver_name" id="receiver_name" value="">
                                     </div>
                                 </div>
                             </div>
@@ -153,9 +154,9 @@
                             
                              <div class="checkout__input">
                                 <p>결제방법 선택<span>*</span></p>
-                                 <select class="custom-select d-block w-100" name="paymethod_id">
+                                 <select  name="paymethod_id">
                                     <%for(Paymethod paymethod : paymethodList) { %>
-                                         <option name="paymethod_id" value="<%= paymethod.getPaymethod_id()%>"><%=paymethod.getMethod() %></option>
+                                         <option value="<%= paymethod.getPaymethod_id()%>"><%=paymethod.getMethod() %></option>
                                     <%} %>
                                    </select>
                                    
@@ -178,8 +179,9 @@
                                 </ul>
                                 <ul class="checkout__total__all">
                                     <li>Delivery charge <span>2,500</span></li>
-                                    <li>Total <span><%=Formatter.getCurrency(totalPrice+2500) %></span></li>
+                                    <li name="total_pay">Total <span><%=Formatter.getCurrency(totalPrice+2500) %></span></li>
                                 </ul>
+                                 
                                 <div class="checkout__input__checkbox">
                                     <label for="acc-or">
                                         Create an account?
@@ -208,14 +210,15 @@
                             </div>
                         </div>
                    
-                </form>
+                
                  </div>
+                 </form>
             </div>
         </div>
     </section>
     <!-- Checkout Section End -->
    <%@ include file="../inc/footer.jsp" %>
-   <%@ include file="../inc/bottom.jsp" %>
+<%@ include file="../inc/bottom.jsp" %>
 </body>
 
 </html>

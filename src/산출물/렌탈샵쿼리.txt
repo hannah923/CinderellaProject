@@ -125,6 +125,7 @@ photoreview_id number primary key
 ,brand varchar(50)
 ,review clob
 ,filename varchar(50)
+,regdate varchar(50)
 );
 alter table photoreview add constraint fk_productphotoreview foreign key(product_id) references product(product_id) on delete cascade;
 

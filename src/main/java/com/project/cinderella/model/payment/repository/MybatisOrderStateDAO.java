@@ -10,21 +10,20 @@ import com.project.cinderella.exception.OrderSummaryRegistException;
 import com.project.cinderella.model.domain.OrderSummary;
 
 @Repository
-public class MybatisOrderSummaryDAO implements OrderSummaryDAO{
+public class MybatisOrderStateDAO implements OrderStateDAO{
    @Autowired
    private SqlSessionTemplate sqlSessionTemplate;
    
-   public void insert(OrderSummary orderSummary) throws OrderSummaryRegistException{
-      int result=sqlSessionTemplate.insert("OrderSummary.insert", orderSummary);
-      if(result==0) {
-         throw new OrderSummaryRegistException("주문요약 등록실패");
-      }
-   }
+   
 
    @Override
    public List selectAll() {
-      return sqlSessionTemplate.selectList("OrderSummary.selectAll");
+      return sqlSessionTemplate.selectList("OrderState.selectAll");
       
    }
+
+
+
+   
    
 }

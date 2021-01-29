@@ -21,6 +21,7 @@ import com.project.cinderella.exception.MemberNotFoundException;
 import com.project.cinderella.exception.MemberRegistException;
 import com.project.cinderella.model.domain.Member;
 import com.project.cinderella.model.member.service.MemberService;
+import com.project.cinderella.model.preview.service.PhotoReviewService;
 import com.project.cinderella.model.product.service.ProductService;
 import com.project.cinderella.model.product.service.TopCategoryService;
 
@@ -30,6 +31,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private PhotoReviewService photoReviewService;
 
 	@Autowired
 	private TopCategoryService topCategoryService;
@@ -68,7 +72,25 @@ public class MemberController {
 		sb.append("}");
 
 		return sb.toString();
-
+}
+	
+	//회원정보 수정
+	@RequestMapping(value = "/shop/member/edit", method = RequestMethod.POST)
+	@ResponseBody
+	public void editMemberInfo(Member member,HttpSession session) {
+		System.out.println("수정컨트롤러 일시작");
+		memberService.update(member);
+		System.out.println("수정컨트롤러끝");
+		
+		session.invalidate();
+	}
+	
+	//회원탈퇴
+	@RequestMapping(value = "/shop/member/delete",method = RequestMethod.POST)
+	public void deleteMember(Member member,HttpSession session) {
+		memberService.delete(member);
+		session.invalidate();
+		
 	}
 
 	// 로그인화면 요청
@@ -106,6 +128,27 @@ public class MemberController {
 
 		ModelAndView mav = new ModelAndView("shop/error/message");
 		mav.addObject("messageData", messageData);
+		return mav;
+	}
+	//쇼핑몰 사용자정보창
+	@RequestMapping(value = "/shop/member/userinfo",method = RequestMethod.GET)
+	public ModelAndView getMember() {
+		List topList = topCategoryService.selectAll();
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("topList", topList);
+		mav.setViewName("/shop/member/userinfo");
+		return mav;
+	}
+	//쇼핑몰 내가 올린 포토리뷰 보기
+	@RequestMapping(value = "/shop/member/mylog",method = RequestMethod.GET)
+	public ModelAndView getPhotoReviewList(String user_id) {
+		List topList = topCategoryService.selectAll();
+		ModelAndView mav = new ModelAndView();
+		System.out.println("user_id:"+user_id);
+		List photoReviewList = photoReviewService.selectForMylog(user_id);
+		mav.addObject("photoReviewList",photoReviewList);
+		mav.addObject("topList", topList);
+		mav.setViewName("shop/member/mylog");
 		return mav;
 	}
 

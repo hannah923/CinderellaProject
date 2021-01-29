@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-
+<%@ include file="../inc/header.jsp"%>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>eCommerce HTML-5 Template </title>
@@ -37,7 +37,7 @@ function login(){
       <div class="container">
          <div class="row">
             <div class="col-lg-12">
-               <div class="breadcrumb__text">
+               <div class="breadcrumb__text" >
                   <h4>Log In</h4>
                </div>
             </div>
@@ -60,29 +60,48 @@ function login(){
                         </div>
                     </div>
                 </div> -->
-                <div class="col-lg-6 col-md-6"  style="margin:0 auto">
+                <div class="col-lg-6 _col-md-6"  style="margin:0 auto">
                     <div class="login_part_form">
                         <div class="login_part_form_iner">
-                            <h3>Welcome Back ! <br>
-                                Please Sign in now</h3>
                                 <div id="loader" style="margin:auto"></div>
                            <form id="loginForm" style="text-align:center">
+                           
+                          
+                           
                             <!-- <form class="row contact_form" action="#" method="post" novalidate="novalidate"> -->
+                               <table style="margin:auto">
+                               <tr>
+                               <td colspan="2">
+                                <h6 class="coupon__code">
+                        <span class="icon_tag_alt"></span> 아직 회원이 아니신가요? <a href="/cinderella/shop/member/registForm"> 회원가입 하러가기
+                          </a> 
+                     </h6>
+                     </td>
+                               </tr>
+                               
+                               <tr>
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="text" name="user_id" placeholder="Username" required>
+                                  <td><h5>  ID : </h5></td> 
+                                  <td class="signin_td"> <input type="text" name="user_id" placeholder="아이디를 입력하세요" required></td>
                                 </div>
+                                </tr>
+                                <tr>
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="password" name="password" placeholder="Password" required>
+                                  <td> <h5> PASSWORD :  &nbsp;</h5></td>
+                                  <td class="signin_td"><input type="password" name="password" placeholder="비밀번호를 입력하세요" required></td>
                                 </div>
-                                <div class="col-md-12 form-group">
+                                </tr>
+                              <tr>
+                              <td class="signin_td" colspan="2">
+                              <!--   <div class="col-md-12 form-group">
                                     <div class="creat_account d-flex align-items-center">
                                        
-                                    </div>
-                                    <input type="button" value="Login" onClick="login()">
-                                        log in
-                                    </button>
-                                 
-                                </div>
+                                    </div> -->
+                                    <input type="button" value="Login" onClick="login()"  style="margin-top:20px">
+                              <!--   </div> -->
+                                </td>
+                                <tr>
+                                </table>
                             </form>
                         </div>
                     </div>
@@ -93,8 +112,7 @@ function login(){
     <!--================login_part end =================-->
 
     <%@ include file="../inc/footer.jsp"%>
-    <%@ include file="../inc/bottom.jsp" %>
-
+<%@ include file="../inc/bottom.jsp" %>
 
 
 </body>
